@@ -1,9 +1,6 @@
-
 from PyQt6.QtCore import QUrl
 from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt6.QtWebEngineWidgets import QWebEngineView
-
-from os import path
  
 class Window(QMainWindow):
     def __init__(self):
@@ -27,8 +24,6 @@ class Window(QMainWindow):
             self.webView.setUrl(QUrl("file:///" + fname[0]))
 
 if __name__ == '__main__':
- 
-    import sys
     app = QApplication([])
     ex = Window()
     ex.show()
