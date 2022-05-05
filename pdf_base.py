@@ -20,7 +20,6 @@ class Window(QMainWindow):
     def showDialog1(self):
         fname = QFileDialog.getOpenFileName(self, 'Open PDF file')
         if fname[0]:
-            print(fname[0])
             self.webView.setUrl(QUrl("file:///" + fname[0]))
 
 if __name__ == '__main__':
