@@ -8,6 +8,7 @@ class Window(QMainWindow):
         super().__init__()
         self.action = []
         self.pdf_file = ''
+        self.isFirst = True 
         self.initUI()
         
     def initUI(self):
@@ -17,7 +18,8 @@ class Window(QMainWindow):
         self.webView = QWebEngineView()
         self.webView.settings().setAttribute(self.webView.settings().WebAttribute.PluginsEnabled, True)
         self.webView.settings().setAttribute(self.webView.settings().WebAttribute.PdfViewerEnabled, True)
-        
+        self.webView.urlChanged.connect(self.onLoadFinished)
+
         self.setCentralWidget(self.webView)
 
         self.menubar = self.menuBar()
@@ -52,7 +54,13 @@ class Window(QMainWindow):
     
     def gotoPage(self, x):
 
+        self.isFirst = True
         self.webView.load(QUrl("file:///" + self.pdf_file + "#page=" + x))
+
+    def onLoadFinished(self):
+        if self.isFirst:
+            self.sender().reload()
+            self.isFirst = False
 
 if __name__ == '__main__':
     app = QApplication([])
