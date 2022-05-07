@@ -47,10 +47,11 @@ class Window(QMainWindow):
             with open(text_file, 'r', encoding='UTF-8') as f:
                 for data in f:
                     data = data.rstrip()
-                    each_line = data.split(',')
-                    self.action.append(QAction(each_line[1].strip()))
-                    self.mokuji_menu.addAction(self.action[-1])
-                    self.action[-1].triggered.connect(lambda state, x = each_line[0].strip(): self.gotoPage(x))
+                    if data != '':
+                        each_line = data.split(',')
+                        self.action.append(QAction(each_line[1].strip()))
+                        self.mokuji_menu.addAction(self.action[-1])
+                        self.action[-1].triggered.connect(lambda state, x = each_line[0].strip(): self.gotoPage(x))
     
     def gotoPage(self, x):
 
